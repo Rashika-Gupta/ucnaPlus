@@ -28,16 +28,16 @@ void energyThrucnaPE2(){
     // file1.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/nDecay+_100Mill_01_oppDirection.txt");
     // file2.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/nDecay+_100Mill_02_oppDirection.txt");		
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
-  //  fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr2_check.txt");
-      sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/n_ucnap_Ethr2_5binwidth.root");
-    Double_t E_thr = 20;
+    // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
+    
+ sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth20kev100Mil.root");
 
-
+std::cout<<"opening root file "<<endl;
 // declare variables to stoer thevalues of branches
     Double_t dEeSilicon1, dEeSilicon2, Te0, timeHit1, timeHit2, pz0_e, pZe, pOutFoilz,pInFoil1z;
     TFile *fout = new TFile(temp,"RECREATE");  //creating output file
     
-    TH1D *KE = new TH1D("KE" ,"KE", 8000., 0., 800.); //creating histogrms
+    TH1D *KE = new TH1D("KE" ,"KE", 160., 0., 800.); //creating histogrms
     TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 160., 0., 800.); //creating histogrms
     TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 160., 0., 800.);
     TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 160., 0., 800.); //creating histogrms
@@ -48,8 +48,13 @@ void energyThrucnaPE2(){
     TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 160., 0., 800.);
     TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 160., 0., 800.); //creating histogrms
     TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 160., 0., 800.);
- 
-
+    
+    TH1D *direct01 = new TH1D("direct01" ,"direct01", 160., 0., 800.); // events emitted in direction opp of dete
+    TH1D *direct11 = new TH1D("direct11" ,"direct11", 160., 0., 800.);
+    TH1D *direct02 = new TH1D("direct02" ,"direct02", 160., 0., 800.); //creating histogrms
+    TH1D *direct12 = new TH1D("direct12" ,"direct12", 160., 0., 800.);
+  
+    TH1D *pzE = new TH1D("pzE","pzE", 200, -1.0, 1.0);
     TH1D *pz11 = new TH1D("pz11","pz11", 200, -1.0, 1.0);
     TH1D *pz12 = new TH1D("pz12","pz12", 200, -1.0, 1.0);
     TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
@@ -65,7 +70,9 @@ void energyThrucnaPE2(){
     Int_t TotalNoHits;
     Double_t counter = 0;
     TChain chain("Tout");
-    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/UCNA+/100-million/6.*.root");
+    
+//////v///
+    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/root-files/ucna+/100Mil-cosTh-changed/1.*.root");
     chain.SetBranchAddress("Te0", &Te0);
     chain.SetBranchAddress("dEeSilicon1", &dEeSilicon1);
     chain.SetBranchAddress("dEeSilicon2", &dEeSilicon2);
@@ -73,10 +80,12 @@ void energyThrucnaPE2(){
     chain.SetBranchAddress("timeHit2", &timeHit2);
     chain.SetBranchAddress("pz0_e", &pZe);
     
+    Double_t E_thr = 20;
     std::cout <<"EThr : "<<E_thr;
-    for (Long64_t i = 0; i <87312500; i++) {
+    for (Long64_t i = 0; i <100000000; i++) {
         chain.GetEntry(i);
         KE->Fill(Te0);
+        pzE->Fill(pZe);
         Double_t E1 = dEeSilicon1;
         Double_t E2 = dEeSilicon2;
         /*setting to zero for below E_thr*/
@@ -102,8 +111,11 @@ void energyThrucnaPE2(){
 // deposits energy on detector 2 type 0 
         if(E1 == 0 && E2 != 0){
 		    EdepType02->Fill(E1+E2);
-            pz02->Fill(pZe);  
-             if(pZe > 0 ){
+            pz02->Fill(pZe);
+            if(pZe<0){
+                direct02->Fill(E1+E2);
+            }
+            if(pZe > 0 ){
                 misEdepType02->Fill(E1+E2);
             }
         }
@@ -111,10 +123,13 @@ void energyThrucnaPE2(){
         if(E2 == 0 && E1 != 0){
            
 		 EdepType01->Fill(E1);
-         pz01->Fill(pZe);      
+         pz01->Fill(pZe);
+         if(pZe > 0 ){
+                direct01->Fill(E1+E2);
+            }
          if(pZe<0){
             misEdepType01->Fill(E1+E2);
-         }         
+         }            
         }
 /*Type 1 above threshold*/
         if(E1 != 0 && E2 != 0){
@@ -123,16 +138,24 @@ void energyThrucnaPE2(){
                 if(timeHit1< timeHit2){
                     EdepType11->Fill(E1 + E2);
                     pz11->Fill(pZe);
-                     if(pZe < 0 ){
+                    
+                    if(pZe > 0 ){
+                        direct11->Fill(E1 + E2);
+                    }
+                    if(pZe < 0 ){
                         misEdepType11->Fill(E1 + E2);
                     }
                 }
                 if(timeHit1 > timeHit2){
                     EdepType12->Fill(E1 + E2);
                     pz12->Fill(pZe);
-                      if(pZe > 0 ){
+                    if(pZe<0){
+                       direct12->Fill(E1+E2);
+                    }
+                    if(pZe > 0 ){
                         misEdepType12->Fill(E1 + E2);
                     }
+ 
                 }
              
         }

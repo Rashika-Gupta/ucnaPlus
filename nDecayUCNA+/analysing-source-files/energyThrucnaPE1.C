@@ -30,9 +30,9 @@ void energyThrucnaPE1(){
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
     // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
     
- sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth10kev.root");
+ sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth10kev100Mil.root");
 
-
+std::cout<<"opening root file "<<endl;
 // declare variables to stoer thevalues of branches
     Double_t dEeSilicon1, dEeSilicon2, Te0, timeHit1, timeHit2, pz0_e, pZe, pOutFoilz,pInFoil1z;
     TFile *fout = new TFile(temp,"RECREATE");  //creating output file
@@ -54,7 +54,7 @@ void energyThrucnaPE1(){
     TH1D *direct02 = new TH1D("direct02" ,"direct02", 160., 0., 800.); //creating histogrms
     TH1D *direct12 = new TH1D("direct12" ,"direct12", 160., 0., 800.);
   
-
+    TH1D *pzE = new TH1D("pzE","pzE", 200, -1.0, 1.0);
     TH1D *pz11 = new TH1D("pz11","pz11", 200, -1.0, 1.0);
     TH1D *pz12 = new TH1D("pz12","pz12", 200, -1.0, 1.0);
     TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
@@ -70,8 +70,9 @@ void energyThrucnaPE1(){
     Int_t TotalNoHits;
     Double_t counter = 0;
     TChain chain("Tout");
-
-    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/UCNA+/100-million/6.*.root");
+    
+//////v///
+    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/root-files/ucna+/100Mil-cosTh-changed/1.*.root");
     chain.SetBranchAddress("Te0", &Te0);
     chain.SetBranchAddress("dEeSilicon1", &dEeSilicon1);
     chain.SetBranchAddress("dEeSilicon2", &dEeSilicon2);
@@ -81,9 +82,10 @@ void energyThrucnaPE1(){
     
     Double_t E_thr = 10;
     std::cout <<"EThr : "<<E_thr;
-    for (Long64_t i = 0; i <87312500; i++) {
+    for (Long64_t i = 0; i <100000000; i++) {
         chain.GetEntry(i);
         KE->Fill(Te0);
+        pzE->Fill(pZe);
         Double_t E1 = dEeSilicon1;
         Double_t E2 = dEeSilicon2;
         /*setting to zero for below E_thr*/
