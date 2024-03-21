@@ -30,7 +30,7 @@ void energyThrucnaPE2(){
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
     // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
     
- sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth20kev100Mil.root");
+ sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth20kev80Mil.root");
 
 std::cout<<"opening root file "<<endl;
 // declare variables to stoer thevalues of branches
@@ -82,7 +82,7 @@ std::cout<<"opening root file "<<endl;
     
     Double_t E_thr = 20;
     std::cout <<"EThr : "<<E_thr;
-    for (Long64_t i = 0; i <100000000; i++) {
+    for (Long64_t i = 0; i <80000000; i++) {
         chain.GetEntry(i);
         KE->Fill(Te0);
         pzE->Fill(pZe);
