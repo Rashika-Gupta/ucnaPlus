@@ -1,0 +1,8 @@
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/edit_cache.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/rebuild_cache.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/list_install_components.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/install.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/install/local.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/install/strip.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/newNab.dir
+/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/UCNA+/build-costh-changedpdf/CMakeFiles/NaB.dir
