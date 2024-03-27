@@ -145,8 +145,8 @@ double UCNBPrimaryGeneratorAction::phaseSpace(double E, double endPointEnergy){
     G4double W0 = endPointEnergy;
     G4double momentum = sqrt(W*W - 1); 
     G4double shape = momentum*W*(W0 -W)*(W0 -W);
-    print(shape)
-    //return shape ;
+    //print(shape)
+    return shape ;
   }
 }
 
