@@ -62,7 +62,9 @@ void UCNBPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   G4double endPointEnergy = (KE_max +massElectron) / massElectron; // total energy of the electron in the units of mass == 2.5
   G4double cosTH_max = -1; //for theta max
   G4double beta_max = 0.75;
-  G4double maxProbability = (1 + Asymmetry* beta_max * cosTH_max);
+ // G4double maxProbability = (1 + Asymmetry* beta_max * cosTH_max);
+  G4double s_max = 1.80; //s_max is from Kurie plot
+  G4double maxProbability = s_max*(1 + Asymmetry* beta_max * cosTH_max);
   
   G4double randomProb = maxProbability;// initialising to the max probability phaseSpace(e) * probabilityFunc(cosTHETAE); 
   G4cout<<"[I] KE_max : "<<KE_max<<" maxProbability : "<<maxProbability<<" randomProb : "<<randomProb<<G4endl;
@@ -138,11 +140,13 @@ void UCNBPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 double UCNBPrimaryGeneratorAction::phaseSpace(double E, double endPointEnergy){
   while( 1 ) {
+  //  G4double maxHeightSpectra = 1.80
     G4double W = E ; // energyTot
     G4double W0 = endPointEnergy;
     G4double momentum = sqrt(W*W - 1); 
     G4double shape = momentum*W*(W0 -W)*(W0 -W);
-    return shape ;
+    print(shape)
+    //return shape ;
   }
 }
 
@@ -190,7 +194,7 @@ double UCNBPrimaryGeneratorAction::Energy2(){
     while (f<y) {
       E=(E0-1.0)*G4UniformRand(); //generating KE/ m_e
       y=1.80*G4UniformRand();
-      FERMI = 1.;
+  /*    FERMI = 1.;
       f=FERMI*sqrt(E*E+2*E)*(E0-(E+1))*(E0-(E+1))*(E+1)*(1+b*1/(E+1));
     }
     return E;
