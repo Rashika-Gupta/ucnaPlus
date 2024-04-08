@@ -1,0 +1,120 @@
+/*
+Date : March 20, 2023
+Details : converting root to txt file
+*/
+
+#include<fstream>
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <fstream>
+#include "TRandom3.h"
+#include "TCanvas.h"
+#include "TChain.h"
+#include "TLeaf.h"
+#include <TTree.h>
+#include <TFile.h>
+#include <TH1F.h>
+#include <TH1D.h>
+#include <TChain.h>
+
+using namespace std;
+
+void energyThrucnaLessThan150(){
+    Char_t temp[200];
+    std::string filename ; 
+
+    ofstream file, file1, fileCheck,file0;
+    // file1.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/nDecay+_100Mill_01_oppDirection.txt");
+    // file2.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/nDecay+_100Mill_02_oppDirection.txt");		
+   file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/lowenergyinfo.txt");
+    // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
+    
+// sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-5kevbinwidth10kevEthr.root");
+ //   sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP_asymmetry_eventGenChanged_80Million_includingAllType_binwidth10kev.root");
+
+std::cout<<"opening root file "<<endl;
+// declare variables to stoer thevalues of branches
+    Double_t dEeSilicon1, dEeSilicon2, Te0, timeHit1, timeHit2, pz0_e, pZe, pOutFoilz,pInFoil1z;
+  //  TFile *fout = new TFile(temp,"RECREATE");  //creating output file
+
+//    TH1D *KE = new TH1D("KE" ,"KE", 80., 0., 800.); //creating histogrms
+//    TH1D *eTrue1 = new TH1D("eTrue1" ,"eTrue1", 80., 0., 800.); //creating histogrms
+//    TH1D *eTrue2 = new TH1D("eTrue2" ,"eTrue2", 80., 0., 800.);
+  
+//    TH1D *KE = new TH1D("KE" ,"KE", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 80., 0., 800.);
+//    TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType12 = new TH1D("EdepType12" ,"EdepType12", 80., 0., 800.);
+//    TH1D *EdepType0  = new TH1D("EdepType0" ,"EdepType0", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType1  = new TH1D("EdepType1" ,"EdepType1", 80., 0., 800.);
+//    TH1D *misEdepType01 = new TH1D("misEdepType01" ,"misEdepType01", 80., 0., 800.); // events emitted in direction opp of dete
+//    TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 80., 0., 800.);
+//    TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 80., 0., 800.); //creating histogrms
+//    TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 80., 0., 800.);
+//    
+//    TH1D *direct01 = new TH1D("direct01" ,"direct01", 80., 0., 800.); // events emitted in direction opp of dete
+//    TH1D *direct11 = new TH1D("direct11" ,"direct11", 80., 0., 800.);
+//    TH1D *direct02 = new TH1D("direct02" ,"direct02", 80., 0., 800.); //creating histogrms
+//    TH1D *direct12 = new TH1D("direct12" ,"direct12", 80., 0., 800.);
+//  
+//    TH1D *pzE = new TH1D("pzE","pzE", 200, -1.0, 1.0);
+//    TH1D *pzKE0 = new TH1D("pzKE0","pzKE0", 200, -1.0, 1.0);
+//    TH1D *pz11 = new TH1D("pz11","pz11", 200, -1.0, 1.0);
+//    TH1D *pz12 = new TH1D("pz12","pz12", 200, -1.0, 1.0);
+//    TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
+//    TH1D *pz02 = new TH1D("pz02","pz02", 200, -1.0, 1.0);
+////  
+//    TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 80., 0., 800.);
+//    TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 80., 0., 800.);
+//    TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 80., 0., 800.); //creating histogrms
+//    TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 80., 0., 800.);
+//      
+//    TH1D *direct01Thr = new TH1D("direct01Thr" ,"direct01Thr", 80., 0., 800.); // events emitted in direction opp of dete
+//    TH1D *direct11Thr = new TH1D("direct11Thr" ,"direct11Thr", 80., 0., 800.);
+//    TH1D *direct02Thr = new TH1D("direct02Thr" ,"direct02Thr", 80., 0., 800.); //creating histogrms
+//    TH1D *direct12Thr = new TH1D("direct12Thr" ,"direct12Thr", 80., 0., 800.);
+//    TH1D *mis02Thr = new TH1D("mis02Thr" ,"mis02Thr", 80., 0., 800.);
+//    TH1D *mis01Thr = new TH1D("mis01Thr" ,"mis01Thr", 80., 0., 800.);
+//  
+//saving the evnets that wouold also be emiited in opposite direction. 
+    Int_t TotalNoHits;
+    Double_t counter = 0;
+    TChain chain("Tout");
+    
+//////v///
+    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/root-files/ucna+/event-gen-mar-27-90mil/6.*.root");
+    chain.SetBranchAddress("Te0", &Te0);
+    chain.SetBranchAddress("dEeSilicon1", &dEeSilicon1);
+    chain.SetBranchAddress("dEeSilicon2", &dEeSilicon2);
+    chain.SetBranchAddress("timeHit1", &timeHit1);
+    chain.SetBranchAddress("timeHit2", &timeHit2);
+    chain.SetBranchAddress("pz0_e", &pZe);
+    
+    Double_t E_thr = 10;
+    std::cout <<"EThr : "<<E_thr;
+    for (Long64_t i = 0; i < 80000000; i++) {
+        chain.GetEntry(i);
+
+       
+        Double_t E1 = dEeSilicon1;
+        Double_t E2 = dEeSilicon2;
+        Double_t eTot = E1 + E2 ; 
+        if (eTot< 150)
+        {
+            file0<<Te0<<" "<<E1<<" "<<E2<<" "<<pZe<<" "<<timeHit1<<" "<<timeHit2<<endl;
+        }
+      
+
+
+  
+    }
+     file.close();
+     fileCheck.close();
+    file0.close();
+ //  fout->Write();
+ //  fout->Close();
+}

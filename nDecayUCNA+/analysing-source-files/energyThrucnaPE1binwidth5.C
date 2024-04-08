@@ -20,7 +20,7 @@ Details : converting root to txt file
 
 using namespace std;
 
-void energyThrucnaPE1Less(){
+void energyThrucnaPE1binwidth5(){
     Char_t temp[200];
     std::string filename ; 
 
@@ -30,14 +30,19 @@ void energyThrucnaPE1Less(){
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
     // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
     
- sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-cosTh-5kevbinwidth10kevLessFile.root");
+// sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP-5kevbinwidth10kevEthr.root");
+    sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP_asymmetry_eventGenChanged_80Million_includingAllType_binwidth5kev.root");
 
 std::cout<<"opening root file "<<endl;
 // declare variables to stoer thevalues of branches
     Double_t dEeSilicon1, dEeSilicon2, Te0, timeHit1, timeHit2, pz0_e, pZe, pOutFoilz,pInFoil1z;
     TFile *fout = new TFile(temp,"RECREATE");  //creating output file
-    
+
     TH1D *KE = new TH1D("KE" ,"KE", 160., 0., 800.); //creating histogrms
+    TH1D *eTrue1 = new TH1D("eTrue1" ,"eTrue1", 160., 0., 800.); //creating histogrms
+    TH1D *eTrue2 = new TH1D("eTrue2" ,"eTrue2", 160., 0., 800.);
+  
+//    TH1D *KE = new TH1D("KE" ,"KE", 160., 0., 800.); //creating histogrms
     TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 160., 0., 800.); //creating histogrms
     TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 160., 0., 800.);
     TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 160., 0., 800.); //creating histogrms
@@ -54,25 +59,41 @@ std::cout<<"opening root file "<<endl;
     TH1D *direct02 = new TH1D("direct02" ,"direct02", 160., 0., 800.); //creating histogrms
     TH1D *direct12 = new TH1D("direct12" ,"direct12", 160., 0., 800.);
   
-
+    TH1D *pzE = new TH1D("pzE","pzE", 200, -1.0, 1.0);
+    TH1D *pzKE0 = new TH1D("pzKE0","pzKE0", 200, -1.0, 1.0);
     TH1D *pz11 = new TH1D("pz11","pz11", 200, -1.0, 1.0);
     TH1D *pz12 = new TH1D("pz12","pz12", 200, -1.0, 1.0);
     TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
     TH1D *pz02 = new TH1D("pz02","pz02", 200, -1.0, 1.0);
-  
+//  
     TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 160., 0., 800.); //creating histogrms
     TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 160., 0., 800.);
     TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 160., 0., 800.); //creating histogrms
     TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 160., 0., 800.);
     TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 160., 0., 800.); //creating histogrms
     TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 160., 0., 800.);
+      
+    TH1D *direct01Thr = new TH1D("direct01Thr" ,"direct01Thr", 160., 0., 800.); // events emitted in direction opp of dete
+    TH1D *direct11Thr = new TH1D("direct11Thr" ,"direct11Thr", 160., 0., 800.);
+    TH1D *direct02Thr = new TH1D("direct02Thr" ,"direct02Thr", 160., 0., 800.); //creating histogrms
+    TH1D *direct12Thr = new TH1D("direct12Thr" ,"direct12Thr", 160., 0., 800.);
+    
+    TH1D *eDep1 = new TH1D("eDep1" ,"eDep1", 160., 0., 800.); //creating histogrms
+    TH1D *eDep2 = new TH1D("eDep2" ,"eDep2", 160., 0., 800.);
+    TH1D *eDepTot1  = new TH1D("eDepTot1" ,"eDepTot1", 160., 0., 800.); //creating histogrms
+    TH1D *eDepTot2  = new TH1D("eDepTot2" ,"eDepTot2", 160., 0., 800.);
+    TH1D *eDepNoThr1 = new TH1D("eDepNoThr1" ,"eDepNoThr1", 160., 0., 800.); // events emitted in direction opp of dete
+    TH1D *eDepNoThr2 = new TH1D("eDepNoThr2" ,"eDepNoThr2", 160., 0., 800.);
+    TH1D *eDepTotNoThr1 = new TH1D("eDepTotNoThr1" ,"eDepTotNoThr1", 160., 0., 800.); //creating histogrms
+    TH1D *eDepTotNoThr2 = new TH1D("eDepTotNoThr2" ,"eDepTotNoThr2", 160., 0., 800.);
+
 //saving the evnets that wouold also be emiited in opposite direction. 
     Int_t TotalNoHits;
     Double_t counter = 0;
     TChain chain("Tout");
     
 //////v///
-    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/root-files/ucna+/100Mil-cosTh-changed/1.*.root");
+    chain.Add("/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/root-files/ucna+/event-gen-mar-27-90mil/6.*.root");
     chain.SetBranchAddress("Te0", &Te0);
     chain.SetBranchAddress("dEeSilicon1", &dEeSilicon1);
     chain.SetBranchAddress("dEeSilicon2", &dEeSilicon2);
@@ -82,25 +103,49 @@ std::cout<<"opening root file "<<endl;
     
     Double_t E_thr = 10;
     std::cout <<"EThr : "<<E_thr;
-    for (Long64_t i = 0; i <50000000; i++) {
+    for (Long64_t i = 0; i < 80000000; i++) {
         chain.GetEntry(i);
         KE->Fill(Te0);
+        pzE->Fill(pZe);
         Double_t E1 = dEeSilicon1;
         Double_t E2 = dEeSilicon2;
-        /*setting to zero for below E_thr*/
+        /*checking what happens when KE = 0 */
+        if(Te0 == 0){
+            pzKE0->Fill(pZe);
+            std::cout<<"pZe : " <<pZe<<endl;
+        }
+
         if(E1 < E_thr){
-       // std::cout<<" dE1 : "<<dEeSilicon1 <<" dE2 : "<<dEeSilicon2<<endl;
             Double_t x  = 0;
             E1 = x;
         }
         
         if(E2 < E_thr){
-     //     std::cout<<" dE1 : "<<dEeSilicon1 <<" dE2 : "<<dEeSilicon2<<endl;
       
             Double_t y  = 0;
             E2 = y;
         }
-   //     std::cout<<" E1 : "<<E1 <<" E2 : "<<E2<<endl;
+        if(pZe > 0){
+            pz01->Fill(pZe);
+            eTrue1 -> Fill(Te0);
+            eDepTotNoThr1->Fill(dEeSilicon1+dEeSilicon2);
+            eDep1->Fill(E1);
+            eDepNoThr1->Fill(dEeSilicon1);
+
+            
+        }
+        if(pZe < 0){
+            pz02->Fill(pZe);
+         
+            eTrue2 -> Fill(Te0);
+            eDep2->Fill(E2);
+            eDepTot2->Fill(E1+E2);
+            eDepNoThr2->Fill(dEeSilicon1);
+            eDepTotNoThr2->Fill(dEeSilicon1+dEeSilicon2);
+   
+        }
+        
+        
       /*----ABOVE THRESHOLD-----*/
       /*filling type 0 above threshold */
         if((E1 !=0 && E2 == 0) ||(E2 !=0 && E1 == 0)){
@@ -109,10 +154,10 @@ std::cout<<"opening root file "<<endl;
         }
 // deposits energy on detector 2 type 0 
         if(E1 == 0 && E2 != 0){
-		    EdepType02->Fill(E1+E2);
-            pz02->Fill(pZe);
-            if(pZe<0){
-                direct02->Fill(E1+E2);
+	    EdepType02->Fill(E1+E2);
+        pz02->Fill(pZe);
+        if(pZe<0){
+            direct02->Fill(E1+E2);
             }
             if(pZe > 0 ){
                 misEdepType02->Fill(E1+E2);
@@ -158,33 +203,40 @@ std::cout<<"opening root file "<<endl;
                 }
              
         }
-        /*------------------ALL EVENTS -------*/
+    //    /*------------------ALL EVENTS -------*/
         if((dEeSilicon1 !=0 && dEeSilicon2 == 0) ||(dEeSilicon2 !=0 && dEeSilicon1 == 0)){
             EdepType0Thr0->Fill(dEeSilicon1+dEeSilicon2);
             
         }
-        if((dEeSilicon1 != E1) || (dEeSilicon2 != E2)){
-            fileCheck<<Te0<<" "<<dEeSilicon1<<" "<<dEeSilicon1<<" "<<E1<<" "<<E2<<" "<<pZe<<endl;
-        }
 // deposits energy on detector 2 type 0 
         if(dEeSilicon1 == 0 && dEeSilicon2 != 0){
 		    EdepType02Thr0->Fill(dEeSilicon1 + dEeSilicon2);
-
-        }
+            if(pZe < 0 ){
+                direct02Thr ->Fill(dEeSilicon1 + dEeSilicon2);
+            }
+       }
 // deposits energy on detector 1 type 0 
         if(dEeSilicon2 == 0 && dEeSilicon1 != 0){
            
 		 EdepType01Thr0->Fill(dEeSilicon1 + dEeSilicon2);
-            
+         if(pZe > 0 ){
+                direct01Thr ->Fill(dEeSilicon1 + dEeSilicon2);
+            }   
         }
         if(dEeSilicon1 != 0 && dEeSilicon2 != 0){
 		   EdepType1Thr0->Fill(dEeSilicon1 + dEeSilicon2);
         
                 if(timeHit1< timeHit2){
                     EdepType11Thr0->Fill(dEeSilicon1+dEeSilicon2);
+                    if(pZe > 0 ){
+                        direct11Thr ->Fill(dEeSilicon1 + dEeSilicon2);
+                     }
                 }
                 if(timeHit1 > timeHit2){
                     EdepType12Thr0->Fill(dEeSilicon1+dEeSilicon2);
+                      if(pZe < 0 ){
+                        direct12Thr ->Fill(dEeSilicon1 + dEeSilicon2);
+                     }
                 }
         }    
     }
