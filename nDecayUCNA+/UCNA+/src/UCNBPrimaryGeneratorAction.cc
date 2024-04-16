@@ -75,13 +75,13 @@ void UCNBPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   while(randomProb > decay_rate_probability){
     
     cosTHETAE = -1 + 2*G4UniformRand(); // generating cos(theta) randomly between -1 and +1
-    energyTot = 1 + (endPointEnergy-1.0)*G4UniformRand(); // [energyTot/massofElectring , generating E_tot from 1 to end point energy ]
+    energyTot = 1.0 + (endPointEnergy-1.0)*G4UniformRand(); // [energyTot/massofElectring , generating E_tot from 1 to end point energy ]
 
     G4double phi =  2.*M_PI*G4UniformRand();//randomly generated from o to 2pi
     decay_rate_probability = phaseSpace(energyTot,endPointEnergy) * probabilityFunc(cosTHETAE, Asymmetry, energyTot); 
-    randomProb = maxProbability*G4UniformRand();
+    randomProb = 0.00001 + maxProbability*G4UniformRand();
     
-    G4cout<<"[W] energyTot : "<<energyTot<<" cosTHETAE : "<<cosTHETAE<<"decay_rate_probability : "<<decay_rate_probability<<" randomProb : "<<randomProb<<G4endl;
+    G4cout<<"[W] energyTot : "<<energyTot<<" cosTHETAE : "<<cosTHETAE<<" decay_rate_probability : "<<decay_rate_probability<<" randomProb : "<<randomProb<<G4endl;
   
   }
 
