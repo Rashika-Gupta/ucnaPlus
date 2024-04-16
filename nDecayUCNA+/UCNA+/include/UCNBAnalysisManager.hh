@@ -64,6 +64,10 @@ public: // Without description
 
   void AddUpElectronFoil1EnergyDeposition(G4double);
   void AddUpElectronFoil2EnergyDeposition(G4double);
+  
+  void AddUpElectronBeTube1EnergyDeposition(G4double);
+  void AddUpElectronBeTube2EnergyDeposition(G4double);
+
 
   void AddUpElectronWindowEnergyDeposition(G4double);
 
@@ -110,8 +114,9 @@ void p1out(G4double, G4double,G4double );
   G4double globalTimeDead1;
   G4double globalTimeDead2;
   G4double dEeSilicon1, dEeDead1;
-   G4double dEeSilicon2, dEeDead2;
-   G4double dEeFoil1, dEeFoil2;
+  G4double dEeSilicon2, dEeDead2;
+  G4double dEeFoil1, dEeFoil2;
+  G4double dEeBeTube1, dEeBeTube2;
   G4double dEeWindow;
   G4double pInFoil1x, pInFoil1y, pInFoil1z;
   G4double pOutFoilx, pOutFoily, pOutFoilz;

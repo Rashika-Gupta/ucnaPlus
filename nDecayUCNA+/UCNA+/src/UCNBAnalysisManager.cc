@@ -102,7 +102,7 @@ void UCNBAnalysisManager::bookROOT()
 	Tout->Branch("ye1D",    &yeDead1,    "ye1D/D");
 	Tout->Branch("ze1D",    &zeDead1,    "ze1D/D");
 
-        Tout->Branch("xe2D",    &xeDead2,    "xe2D/D");
+  Tout->Branch("xe2D",    &xeDead2,    "xe2D/D");
 	Tout->Branch("ye2D",    &yeDead2,    "ye2D/D");
 	Tout->Branch("ze2D",    &zeDead2,    "ze2D/D");
   
@@ -114,6 +114,9 @@ void UCNBAnalysisManager::bookROOT()
 //  Tout->Branch("dEeDead2",    &dEeDead2,    "dEeDead2/D");
   Tout->Branch("dEeFoil1",    &dEeFoil1,    "dEeFoil1/D");
   Tout->Branch("dEeFoil2",    &dEeFoil2,    "dEeFoil2/D");
+  Tout->Branch("dEeBeTube1",    &dEeBeTube1,    "dEeBeTube1/D");
+  Tout->Branch("dEeBeTube2",    &dEeBeTube2,    "dEeBeTube2/D");
+
 //----------------------------------------------------------------------------------
   //Tout->Branch("dEpOther",    &dEpOther,    "dEpOther/D");
   //Tout->Branch("dEpSilicon1", &dEpSilicon1, "dEpSilicon1/D");
@@ -490,6 +493,14 @@ void UCNBAnalysisManager::AddUpElectronFoil1EnergyDeposition(G4double x)
 void UCNBAnalysisManager::AddUpElectronFoil2EnergyDeposition(G4double x)
 {
   dEeFoil2 = dEeFoil2 + x;
+}
+void UCNBAnalysisManager::AddUpElectronBeTube1EnergyDeposition(G4double x)
+{
+  dEeBeTube1 = dEeBeTube1 + x;
+}
+void UCNBAnalysisManager::AddUpElectronBeTube2EnergyDeposition(G4double x)
+{
+  dEeBeTube2 = dEeBeTube2 + x;
 }
 void UCNBAnalysisManager::AddUpProtonSilicon1EnergyDeposition(G4double x)
 {

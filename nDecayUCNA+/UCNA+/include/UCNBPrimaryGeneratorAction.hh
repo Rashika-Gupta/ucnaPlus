@@ -15,9 +15,10 @@ class UCNBPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   public:
     void GeneratePrimaries(G4Event*);
-
-  double ENERGY2();
-  double aprob2(double, double, double, double);
+    double phaseSpace(double,double);
+    double probabilityFunc(double,double,double );
+ // double ENERGY2();
+ // double aprob2(double, double, double, double);
 
   private:
     G4ParticleGun* particleGun;

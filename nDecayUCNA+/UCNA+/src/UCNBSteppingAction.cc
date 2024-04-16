@@ -278,7 +278,7 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
       G4ThreeVector hitSilicon1d = fStep->GetPreStepPoint()->GetPosition();
       if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
         G4double dEstep = fStep->GetTotalEnergyDeposit();
-        UCNBAnalysisManager::getInstance()->AddUpElectronFoil1EnergyDeposition(dEstep/keV);
+      //  UCNBAnalysisManager::getInstance()->AddUpElectronFoil1EnergyDeposition(dEstep/keV);
         G4ThreeVector pIncFoil1 = fStep->GetPostStepPoint()->GetMomentumDirection();
         G4double pInFoil1x = pIncFoil1.x();
         G4double pInFoil1y = pIncFoil1.y();
@@ -297,7 +297,7 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
     G4cout<<" Leaving : "<<  fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName()<<G4endl;
       if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
         G4double dEstep = fStep->GetTotalEnergyDeposit();
-        UCNBAnalysisManager::getInstance()->AddUpElectronFoil2EnergyDeposition(dEstep/keV);
+       // UCNBAnalysisManager::getInstance()->AddUpElectronFoil2EnergyDeposition(dEstep/keV);
         G4ThreeVector pOutFoil1 = fStep->GetPreStepPoint()->GetMomentumDirection();
         G4double pOutFoilx = pOutFoil1.x();
         G4double pOutFoily = pOutFoil1.y();
@@ -308,6 +308,40 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
 
        }
   }
+  if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "foil1") {
+      //G4ThreeVector hitSilicon1d = fStep->GetPreStepPoint()->GetPosition();
+      if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
+        G4double dEstep = fStep->GetTotalEnergyDeposit();
+          G4cout<<"Foil 1"<<G4endl;
+        UCNBAnalysisManager::getInstance()->AddUpElectronFoil1EnergyDeposition(dEstep/keV);
+       }
+  }
+  if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "foil2") {
+      //G4ThreeVector hitSilicon1d = fStep->GetPreStepPoint()->GetPosition();
+      if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
+        G4double dEstep = fStep->GetTotalEnergyDeposit();
+        G4cout<<"Foil 2"<<G4endl;
+        UCNBAnalysisManager::getInstance()->AddUpElectronFoil2EnergyDeposition(dEstep/keV);
+       }
+  }
+
+  if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "BeTube1") {
+      //G4ThreeVector hitSilicon1d = fStep->GetPreStepPoint()->GetPosition();
+      if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
+        G4double dEstep = fStep->GetTotalEnergyDeposit();
+          G4cout<<"Foil 1"<<G4endl;
+        UCNBAnalysisManager::getInstance()->AddUpElectronBeTube1EnergyDeposition(dEstep/keV);
+       }
+  }
+  if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "BeTube2") {
+      //G4ThreeVector hitSilicon1d = fStep->GetPreStepPoint()->GetPosition();
+      if ( ((fStep->GetTrack()->GetTrackID() != 2)) && ((fStep->GetTrack()->GetParentID() != 2)) ) {
+        G4double dEstep = fStep->GetTotalEnergyDeposit();
+        G4cout<<"Foil 2"<<G4endl;
+        UCNBAnalysisManager::getInstance()->AddUpElectronBeTube2EnergyDeposition(dEstep/keV);
+       }
+  }
+
 
 // G4cout<<" Breaking here ln 234 ----------- "<<G4endl;
   // Add up energy deposition in Silicon Detector #1
