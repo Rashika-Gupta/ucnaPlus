@@ -20,7 +20,7 @@ Details : converting root to txt file
 
 using namespace std;
 
-void energyThrucnaPE2(){
+void energyThrucnaPE3_20binwidth(){
     Char_t temp[200];
     std::string filename ; 
 
@@ -30,33 +30,33 @@ void energyThrucnaPE2(){
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
     // fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_check.txt");
     
-    sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP_asymmetry_eventGenChanged_80Million_includingAllType_binwidth20kev_Ethr20.root");
+    sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/ucnaPlus/nDecayUCNA+/ucnaP_asymmetry_eventGenChanged_80Million_includingAllType_binwidth20kev_Ethr30.root");
 
 std::cout<<"opening root file "<<endl;
 // declare variables to stoer thevalues of branches
     Double_t dEeSilicon1, dEeSilicon2, Te0, timeHit1, timeHit2, pz0_e, pZe, pOutFoilz,pInFoil1z;
     TFile *fout = new TFile(temp,"RECREATE");  //creating output file
 
-    TH1D *KE = new TH1D("KE" ,"KE", 40., 0., 800.); //creating histogrms
-    TH1D *eTrue1 = new TH1D("eTrue1" ,"eTrue1", 40., 0., 800.); //creating histogrms
-    TH1D *eTrue2 = new TH1D("eTrue2" ,"eTrue2", 40., 0., 800.);
+    TH1D *KE = new TH1D("KE" ,"KE", 40, 0., 800.); //creating histogrms
+    TH1D *eTrue1 = new TH1D("eTrue1" ,"eTrue1", 40, 0., 800.); //creating histogrms
+    TH1D *eTrue2 = new TH1D("eTrue2" ,"eTrue2", 40, 0., 800.);
   
-//    TH1D *KE = new TH1D("KE" ,"KE", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 40., 0., 800.);
-    TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType12 = new TH1D("EdepType12" ,"EdepType12", 40., 0., 800.);
-    TH1D *EdepType0  = new TH1D("EdepType0" ,"EdepType0", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType1  = new TH1D("EdepType1" ,"EdepType1", 40., 0., 800.);
-    TH1D *misEdepType01 = new TH1D("misEdepType01" ,"misEdepType01", 40., 0., 800.); // events emitted in direction opp of dete
-    TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 40., 0., 800.);
-    TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 40., 0., 800.); //creating histogrms
-    TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 40., 0., 800.);
+//    TH1D *KE = new TH1D("KE" ,"KE", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 40, 0., 800.);
+    TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType12 = new TH1D("EdepType12" ,"EdepType12", 40, 0., 800.);
+    TH1D *EdepType0  = new TH1D("EdepType0" ,"EdepType0", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType1  = new TH1D("EdepType1" ,"EdepType1", 40, 0., 800.);
+    TH1D *misEdepType01 = new TH1D("misEdepType01" ,"misEdepType01", 40, 0., 800.); // events emitted in direction opp of dete
+    TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 40, 0., 800.);
+    TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 40, 0., 800.); //creating histogrms
+    TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 40, 0., 800.);
     
-    TH1D *direct01 = new TH1D("direct01" ,"direct01", 40., 0., 800.); // events emitted in direction opp of dete
-    TH1D *direct11 = new TH1D("direct11" ,"direct11", 40., 0., 800.);
-    TH1D *direct02 = new TH1D("direct02" ,"direct02", 40., 0., 800.); //creating histogrms
-    TH1D *direct12 = new TH1D("direct12" ,"direct12", 40., 0., 800.);
+    TH1D *direct01 = new TH1D("direct01" ,"direct01", 40, 0., 800.); // events emitted in direction opp of dete
+    TH1D *direct11 = new TH1D("direct11" ,"direct11", 40, 0., 800.);
+    TH1D *direct02 = new TH1D("direct02" ,"direct02", 40, 0., 800.); //creating histogrms
+    TH1D *direct12 = new TH1D("direct12" ,"direct12", 40, 0., 800.);
   
     TH1D *pzE = new TH1D("pzE","pzE", 200, -1.0, 1.0);
     TH1D *pzKE0 = new TH1D("pzKE0","pzKE0", 200, -1.0, 1.0);
@@ -65,20 +65,21 @@ std::cout<<"opening root file "<<endl;
     TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
     TH1D *pz02 = new TH1D("pz02","pz02", 200, -1.0, 1.0);
 //  
-    TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 40., 0., 800.);
-    TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 40., 0., 800.);
-    TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 40., 0., 800.); //creating histogrms
-    TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 40., 0., 800.);
+    TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 40, 0., 800.);
+    TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 40, 0., 800.);
+    TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 40, 0., 800.); //creating histogrms
+    TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 40, 0., 800.);
       
-    TH1D *direct01Thr = new TH1D("direct01Thr" ,"direct01Thr", 40., 0., 800.); // events emitted in direction opp of dete
-    TH1D *direct11Thr = new TH1D("direct11Thr" ,"direct11Thr", 40., 0., 800.);
-    TH1D *direct02Thr = new TH1D("direct02Thr" ,"direct02Thr", 40., 0., 800.); //creating histogrms
-    TH1D *direct12Thr = new TH1D("direct12Thr" ,"direct12Thr", 40., 0., 800.);
-    TH1D *mis02Thr = new TH1D("mis02Thr" ,"mis02Thr", 40., 0., 800.);
-    TH1D *mis01Thr = new TH1D("mis01Thr" ,"mis01Thr", 40., 0., 800.);
-      Int_t TotalNoHits;
+    TH1D *direct01Thr = new TH1D("direct01Thr" ,"direct01Thr", 40, 0., 800.); // events emitted in direction opp of dete
+    TH1D *direct11Thr = new TH1D("direct11Thr" ,"direct11Thr", 40, 0., 800.);
+    TH1D *direct02Thr = new TH1D("direct02Thr" ,"direct02Thr", 40, 0., 800.); //creating histogrms
+    TH1D *direct12Thr = new TH1D("direct12Thr" ,"direct12Thr", 40, 0., 800.);
+    TH1D *mis02Thr = new TH1D("mis02Thr" ,"mis02Thr", 40, 0., 800.);
+    TH1D *mis01Thr = new TH1D("mis01Thr" ,"mis01Thr", 40, 0., 800.);
+  //saving the evnets that wouold also be emiited in opposite direction. 
+    Int_t TotalNoHits;
     Double_t counter = 0;
     TChain chain("Tout");
     
@@ -91,7 +92,7 @@ std::cout<<"opening root file "<<endl;
     chain.SetBranchAddress("timeHit2", &timeHit2);
     chain.SetBranchAddress("pz0_e", &pZe);
     
-    Double_t E_thr = 20;
+    Double_t E_thr = 30;
     std::cout <<"EThr : "<<E_thr;
     for (Long64_t i = 0; i <80000000; i++) {
         chain.GetEntry(i);
@@ -111,25 +112,6 @@ std::cout<<"opening root file "<<endl;
       
             Double_t y  = 0;
             E2 = y;
-        }
-        if(pZe > 0){
-            pz01->Fill(pZe);
-            eTrue1 -> Fill(Te0);
-        //    eDepTotNoThr1->Fill(dEeSilicon1+dEeSilicon2);
-        //    eDep1->Fill(E1);
-        //    eDepNoThr1->Fill(dEeSilicon1);
-
-            
-        }
-        if(pZe < 0){
-            pz02->Fill(pZe);
-         
-            eTrue2 -> Fill(Te0);
-        //    eDep2->Fill(E2);
-        //    eDepTot2->Fill(E1+E2);
-        //    eDepNoThr2->Fill(dEeSilicon1);
-        //    eDepTotNoThr2->Fill(dEeSilicon1+dEeSilicon2);
-   
         }
    //     std::cout<<" E1 : "<<E1 <<" E2 : "<<E2<<endl;
       /*----ABOVE THRESHOLD-----*/
