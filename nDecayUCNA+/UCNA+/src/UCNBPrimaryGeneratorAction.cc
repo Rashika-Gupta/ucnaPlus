@@ -60,7 +60,7 @@ void UCNBPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   G4double KE_max = 0.782;//*keV;//*keV; //max KE of decayed electron
   G4double massElectron = 0.511;//*keV;
   G4double endPointEnergy = (KE_max +massElectron) / massElectron; // total energy of the electron in the units of mass == 2.5
-  G4double cosTH_max = -1; //for theta max
+  G4double cosTH_max = 1; //for theta max
   G4double beta_max = 0.75;
  // G4double maxProbability = (1 + Asymmetry* beta_max * cosTH_max);
   G4double s_max = 1.80; //s_max is from Kurie plot
