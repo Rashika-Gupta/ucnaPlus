@@ -46,7 +46,7 @@ void UCNBPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   G4double ME1 = 1.;
   //--------------------------------------------------------
 
-  G4double A = 1; ;//-2.*elambda*(1.+elambda)/(1.+3.*elambda*elambda);
+  G4double A = 1.0; ;//-2.*elambda*(1.+elambda)/(1.+3.*elambda*elambda);
   G4double B = -2.*elambda*(1.-elambda)/(1.+3.*elambda*elambda);
   G4double ALIT = (1.-elambda*elambda)/(1.+3.*elambda*elambda);
   G4double Asymmetry = A; 
