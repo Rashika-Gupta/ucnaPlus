@@ -195,6 +195,8 @@ G4double nAtoms;
   
   G4double halfLengthDrift12 = 0.35*m;
   G4double zDrift12 = 1.85*m; 
+  G4double zDrift2 = -1.85*m; 
+  
   G4double xDrift12 = 0.0*m;
   G4double yDrift12 = 0.0*m;
   Drift1 = new G4Tubs("Drift1", innerRadiusDrift12, outerRadiusDrift12, halfLengthDrift12,
@@ -208,7 +210,7 @@ G4double nAtoms;
   Drift2 = new G4Tubs("Drift2", innerRadiusDrift12, outerRadiusDrift12, halfLengthDrift12,
 		      startAngleDrift12, spanningAngleDrift12);
   logicalDrift2 = new G4LogicalVolume(Drift2, Vacuum, "Drift2");
-  physicalDrift2 = new G4PVPlacement(0, G4ThreeVector(xDrift12,yDrift12,-1.*zDrift12),
+  physicalDrift2 = new G4PVPlacement(0, G4ThreeVector(xDrift12,yDrift12,zDrift2),
 				    logicalDrift2, "Drift2", logicalWorld, false, 0);
 /*-------------------------- THIN FOIL ---------------------------------*/
 /*need to place within the logical volume of the drift tu*/
@@ -216,7 +218,7 @@ G4double nAtoms;
   G4double dCoatingThick = 150*nm ;
   G4double dFoilThick = 130*nm ;
   G4double leftDrift = -0.35*m ;
-  G4double rightDrift = 0.3499998*m ;
+  G4double rightDrift = +0.35*m ;
    // the leftmost point of the drift region wrt center of drift placed at 1.85*m
   G4double zEndCap = leftDrift + dVary;
   G4double zCoating = zEndCap + dCoatingThick/2;
@@ -236,16 +238,24 @@ G4double nAtoms;
 
   G4double zEndCap2 = rightDrift + dVary;
   G4double zCoating2 = zEndCap2 + dCoatingThick/2;
-  G4double zFoil2  = dCoatingThick/2+zCoating2+dFoilThick/2;
-  G4cout<<"ZFoil2  "<<zFoil2<<G4endl;
-  G4cout<<"zCoating 2 : "<<zCoating2<<G4endl;
+ // G4double zFoil2  = dCoatingThick/2+zCoating2+dFoilThick/2;
+ // G4cout<<"ZFoil2  "<<zFoil2<<G4endl;
+ // G4cout<<"zCoating 2 : "<<zCoating2<<G4endl;
   BeTube2 = new G4Tubs("BeTube2", 0., outerRadiusDecayTrapInt, dCoatingThick/2., 0., 2*M_PI);
   logicalBeTube2 = new G4LogicalVolume(BeTube2, Beryllium, "BeTube2");
-  physicalBeTube2 = new G4PVPlacement(0, G4ThreeVector(0,0,    zCoating2), logicalBeTube2, "BeTube2", logicalDrift2, false, 0);
+  physicalBeTube2 = new G4PVPlacement(0, G4ThreeVector(0,0,    -1.*zCoating), logicalBeTube2, "BeTube2", logicalDrift2, false, 0);
  
   foil2 = new G4Tubs("foil2", 0., outerRadiusDecayTrapInt, dFoilThick/2., 0., 2*M_PI);
   logicalfoil2 = new G4LogicalVolume(foil2, sixFsixF , "foil2");
-  physicalfoil2 = new G4PVPlacement(0, G4ThreeVector(0,0,    zFoil2), logicalfoil2, "foil2", logicalDrift2, false, 0);
+  physicalfoil2 = new G4PVPlacement(0, G4ThreeVector(0,0,    -1.*zFoil), logicalfoil2, "foil2", logicalDrift2, false, 0);
+
+// Print out information about Drift2
+G4cout << "Drift1 Position: " << physicalDrift1->GetTranslation() << G4endl;
+G4cout << "Drift1 Dimensions: " << halfLengthDrift12 << " (half length)" << G4endl;
+// Print out information about foil2
+G4cout << "foil1 Position: " << physicalfoil1->GetTranslation() << G4endl;
+G4cout << "foil2 Position: " << physicalfoil2->GetTranslation() << G4endl;
+
 
 // removing the qindow source holder. 
 /*Introducing source holder - windowTube */
